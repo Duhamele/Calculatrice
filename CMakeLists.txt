@@ -15,15 +15,17 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 set(PROJECT_SOURCES
     src/main.cpp
         src/calwindow.cpp
-        calwindow.h
-        calwindow.ui
+        src/calwindow.h
+        src/calwindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Caltratrice
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        interface_core_cal.h src/interface_core_cal.cpp
+        src/interface_core_cal.h src/interface_core_cal.cpp
+        src/calculatricestring.h src/calculatricestring.cpp
+        src/math.h
 
     )
 # Define target properties for Android with Qt 6 as:
