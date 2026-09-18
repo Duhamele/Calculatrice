@@ -2,6 +2,7 @@
 //#include <sys/types.h>
 #include <QString>
 #include  <stdint.h>
+#include <stdexcept>
 CalculatriceString::CalculatriceString() {}
 
 
