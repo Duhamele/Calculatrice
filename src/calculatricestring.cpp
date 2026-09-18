@@ -1,11 +1,12 @@
 #include "calculatricestring.h"
-#include <sys/types.h>
+//#include <sys/types.h>
 #include <QString>
+#include  <stdint.h>
 CalculatriceString::CalculatriceString() {}
 
 
 
-enum class TypeTokenComputeString: u_int8_t{
+enum class TypeTokenComputeString: std::int8_t{
     Number,
     Add,
     Sub,
