@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(Caltratrice VERSION 0.1 LANGUAGES CXX)
+project(CALCULATOR VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -8,12 +8,14 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(DIR_CALCULATOR ${CMAKE_CURRENT_SOURCE_DIR})
 message(STATUS "################################")
-message(STATUS "#     Projet Calatrice         #")
+message(STATUS "#     Projet CALCULATOR        #")
 message(STATUS "################################")
+message(STATUS "dir: ${DIR_CALCULATOR}")
 message(STATUS "C++: ${CMAKE_CXX_STANDARD}")
 message(STATUS "Cmake: ${CMAKE_VERSION}")
-
+set(SRC_CALCULATOR "{DIR_CALCULATOR}/src")
 
 
 
@@ -29,7 +31,7 @@ set(PROJECT_SOURCES
         src/calwindow.h
         src/calwindow.ui
         src/interface_core_cal.h src/interface_core_cal.cpp
-        src/calculatricestring.h src/calculatricestring.cpp
+        src/calculatorstring.h src/calculatorstring.cpp
         src/math.h
 )
 
@@ -37,6 +39,7 @@ if(QT_VERSION_MAJOR GREATER_EQUAL 6)
     qt_add_executable(Caltratrice
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+
 
 
 
@@ -85,7 +88,7 @@ install(TARGETS Caltratrice
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
-
+add_subdirectory(test)
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(Caltratrice)
 endif()
