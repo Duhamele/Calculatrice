@@ -32,7 +32,7 @@ set(PROJECT_SOURCES
         src/calwindow.ui
         src/interface_core_cal.h src/interface_core_cal.cpp
         src/calculatorstring.h src/calculatorstring.cpp
-        src/math.h
+        src/cal_math.h
 )
 
 if(QT_VERSION_MAJOR GREATER_EQUAL 6)
@@ -88,6 +88,7 @@ install(TARGETS Caltratrice
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+enable_testing()
 add_subdirectory(test)
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(Caltratrice)
