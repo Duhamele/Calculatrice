@@ -15,7 +15,7 @@ message(STATUS "################################")
 message(STATUS "dir: ${DIR_CALCULATOR}")
 message(STATUS "C++: ${CMAKE_CXX_STANDARD}")
 message(STATUS "Cmake: ${CMAKE_VERSION}")
-set(SRC_CALCULATOR "{DIR_CALCULATOR}/src")
+set(SRC_CALCULATOR "${DIR_CALCULATOR}/src")
 
 
 
