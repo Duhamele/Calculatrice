@@ -1,7 +1,7 @@
 
-set(FILES_TEST_CAL_MATH add_number.cpp)
+set(FILES_TEST_CAL_MATH add_number.cpp
+                        equal_number.cpp)
 
-enable_testing()
 foreach( FILE_TEST_CAL_MATH ${FILES_TEST_CAL_MATH})
     message(STATUS "test: ${FILE_TEST_CAL_MATH}")
     set(NAME_TEST "Test_${FILE_TEST_CAL_MATH}")
