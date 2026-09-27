@@ -16,14 +16,26 @@ message(STATUS "dir: ${DIR_CALCULATOR}")
 message(STATUS "C++: ${CMAKE_CXX_STANDARD}")
 message(STATUS "Cmake: ${CMAKE_VERSION}")
 set(SRC_CALCULATOR "${DIR_CALCULATOR}/src")
-
-
-
-
+message(STATUS "")
+message(STATUS "Load Libairie")
+include(FetchContent)
+message(STATUS "FetchContent")
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 message(STATUS "Qt: ${QT_VERSION}")
+
+
+FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG v1.17.0
+)
+
+FetchContent_MakeAvailable(googletest)
+message(STATUS "GoogleTest")
+
+
 
 set(PROJECT_SOURCES
     src/main.cpp

@@ -58,7 +58,7 @@ public:
             val2=isInt(other.type)?static_cast<float>(other.Int):other.Float;
         return NumberDynamy(val1/val2);
     };
-    bool operator==(NumberDynamy other){
+    bool operator==(const NumberDynamy other)const{
         if(isInt(this->type)&&isInt(other.type)){
             return this->Int==other.Int;
         }
