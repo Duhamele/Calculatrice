@@ -3,7 +3,8 @@
 #include <QString>
 #include  <stdint.h>
 #include <stdexcept>
-
+#include "cal_math.h"
+#include <span>
 
 
 
@@ -68,7 +69,52 @@ std::vector<TokenComputeString> TokenizerComputeString(QString string){
         number.clear();
     }
     return array;
+};
 
+NumberDynamy rule_number(std::span<TokenComputeString> chaine){
+    if(chaine.size()==1){
+        return NumberDynamy(chaine[0].number);
+    }
+    if(chaine.size()==2 && chaine[0].type==TypeTokenComputeString::Sub){
+        return NumberDynamy(-chaine[1].number);
+    }
+    return NumberDynamy(0);
+}
+
+NumberDynamy rule_mul_div(std::span<TokenComputeString> chaine){
+    for(int i=1;i<chaine.size()-1;i++){
+        switch (chaine[i].type) {
+        case TypeTokenComputeString::Mul:
+            return rule_number(chaine.subspan(0,i-1))*
+                   rule_mul_div(chaine.subspan(i+1,chaine.size()-i));
+
+            break;
+        case TypeTokenComputeString::Div:
+            return rule_number(chaine.subspan(0,i-1))/
+                   rule_mul_div(chaine.subspan(i+1,chaine.size()-i));
+        default:
+            break;
+        }
+    }
+    return rule_number(chaine);
+
+}
+NumberDynamy rule_add_sub(std::span<TokenComputeString> chaine){
+    for(int i=1;i<chaine.size()-1;i++){
+        switch (chaine[i].type) {
+        case TypeTokenComputeString::Add:
+            return rule_mul_div(chaine.subspan(0,i-1))+
+                   rule_add_sub(chaine.subspan(i+1,chaine.size()-i));
+
+            break;
+        case TypeTokenComputeString::Sub:
+            return rule_mul_div(chaine.subspan(0,i-1))-
+                   rule_add_sub(chaine.subspan(i+1,chaine.size()-i));
+        default:
+            break;
+        }
+    }
+    return rule_mul_div(chaine);
 }
 
 
