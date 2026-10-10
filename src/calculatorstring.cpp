@@ -42,7 +42,7 @@ TokenComputeString QCharOpToTokenComputeString(QChar op){
         return {.type=TypeTokenComputeString::Mul};
         break;
     case '-':
-        return {.type=TypeTokenComputeString::Add};
+        return {.type=TypeTokenComputeString::Sub};
     default:
         throw new std::invalid_argument("");
         break;
@@ -85,13 +85,13 @@ NumberDynamy rule_mul_div(std::span<TokenComputeString> chaine){
     for(int i=1;i<chaine.size()-1;i++){
         switch (chaine[i].type) {
         case TypeTokenComputeString::Mul:
-            return rule_number(chaine.subspan(0,i-1))*
-                   rule_mul_div(chaine.subspan(i+1,chaine.size()-i));
+            return rule_number(chaine.subspan(0,i))*
+                   rule_mul_div(chaine.subspan(i+1,chaine.size()-i-1));
 
             break;
         case TypeTokenComputeString::Div:
-            return rule_number(chaine.subspan(0,i-1))/
-                   rule_mul_div(chaine.subspan(i+1,chaine.size()-i));
+            return rule_number(chaine.subspan(0,i))/
+                   rule_mul_div(chaine.subspan(i+1,chaine.size()-i-1));
         default:
             break;
         }
@@ -103,18 +103,20 @@ NumberDynamy rule_add_sub(std::span<TokenComputeString> chaine){
     for(int i=1;i<chaine.size()-1;i++){
         switch (chaine[i].type) {
         case TypeTokenComputeString::Add:
-            return rule_mul_div(chaine.subspan(0,i-1))+
-                   rule_add_sub(chaine.subspan(i+1,chaine.size()-i));
-
-            break;
+            return rule_mul_div(chaine.subspan(0,i))+
+                   rule_add_sub(chaine.subspan(i+1,chaine.size()-i-1));
         case TypeTokenComputeString::Sub:
-            return rule_mul_div(chaine.subspan(0,i-1))-
-                   rule_add_sub(chaine.subspan(i+1,chaine.size()-i));
+            return rule_mul_div(chaine.subspan(0,i))-
+                   rule_add_sub(chaine.subspan(i+1,chaine.size()-i-1));
         default:
-            break;
+            continue;
         }
     }
     return rule_mul_div(chaine);
+}
+NumberDynamy evalString(QString string){
+    auto array=TokenizerComputeString(string);
+    return rule_add_sub(std::span(array));
 }
 
 

@@ -1,6 +1,7 @@
 #ifndef MATH_H
 #define MATH_H
 #include <sys/types.h>
+#include <string>
 enum class TypeNumber: u_int8_t{
     Float,
     Int,
@@ -65,6 +66,18 @@ public:
         float val1=isInt(this->type)?static_cast<float>(this->Int):this->Float,
             val2=isInt(other.type)?static_cast<float>(other.Int):other.Float;
         return val1==val2;
+    }
+    std::string toString() const{
+        switch (this->type) {
+        case TypeNumber::Float:
+            return std::to_string(this->Float);
+            break;
+        case TypeNumber::Int:
+            return std::to_string(this->Int);
+        default:
+            break;
+        }
+
     }
 
 };
