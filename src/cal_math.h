@@ -53,7 +53,7 @@ public:
     };
     NumberDynamy operator/(NumberDynamy other){
         if(isInt(this->type)&&isInt(other.type) && other.Int!=0 && this->Int%other.Int==0){
-            return NumberDynamy(this->Int*other.Int);
+            return NumberDynamy(this->Int/other.Int);
         }
         float val1=isInt(this->type)?static_cast<float>(this->Int):this->Float,
             val2=isInt(other.type)?static_cast<float>(other.Int):other.Float;
@@ -77,6 +77,7 @@ public:
         default:
             break;
         }
+        return "";
 
     }
 
