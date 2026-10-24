@@ -4,7 +4,6 @@ Interface_core_cal::Interface_core_cal(QTextEdit* output):output(output) {
     if(output==nullptr){
         throw new std::invalid_argument("Ouput invalid");
     }
-    qDebug() << "textBrowser =" << output;
 }
 
 void Interface_core_cal::addchar(QChar symvol){
